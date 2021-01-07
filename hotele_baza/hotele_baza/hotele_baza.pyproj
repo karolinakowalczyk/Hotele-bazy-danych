@@ -4,6 +4,7 @@
     <Name>hotele_baza</Name>
     <RootNamespace>hotele_baza</RootNamespace>
     <InterpreterId>Global|PythonCore|3.9</InterpreterId>
+    <TestFramework>Pytest</TestFramework>
   </PropertyGroup>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -30,6 +31,16 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="databaseapp\admin.py" />
+    <Compile Include="databaseapp\apps.py" />
+    <Compile Include="databaseapp\migrations\__init__.py" />
+    <Compile Include="databaseapp\models.py" />
+    <Compile Include="databaseapp\tests.py" />
+    <Compile Include="databaseapp\urls.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="databaseapp\views.py" />
+    <Compile Include="databaseapp\__init__.py" />
     <Compile Include="manage.py" />
     <Compile Include="hotele_baza\__init__.py" />
     <Compile Include="hotele_baza\settings.py" />
@@ -40,6 +51,8 @@
     <Content Include="requirements.txt" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="databaseapp\" />
+    <Folder Include="databaseapp\migrations\" />
     <Folder Include="hotele_baza\" />
   </ItemGroup>
   <ItemGroup>

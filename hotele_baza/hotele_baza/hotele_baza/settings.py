@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # https://docs.djangoproject.com/en/2.1/ref/settings/#std:setting-INSTALLED_APPS
 INSTALLED_APPS = [
     # Add your apps here to enable them
+    'databaseapp.apps.DatabaseappConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -106,7 +107,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
 LANGUAGE_CODE = 'en-us'
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'UTC+1'
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True
