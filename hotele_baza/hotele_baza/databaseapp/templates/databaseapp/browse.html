@@ -10,4 +10,13 @@
     {% else %}
         <p>No polls are available.</p>
     {% endif %}
+    {% if reservation_list %}
+        <ul>
+        {% for res in reservation_list %}
+            <li> {{ res.reservation_id}} {{res.room}}{{ res.date_start }} {{res.date_end}}</li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No polls are available.</p>
+    {% endif %}
 {% endblock content %} 
