@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 #from django.contrib.auth.forms import UserCreationForm
 from .models import Users, Rooms, Reservations
-from .forms import SignUpForm
+from .forms import SignUpForm, loginForm
 from datetime import date
 
 
@@ -11,7 +11,19 @@ def index(request):
     return render(request, 'databaseapp/index.html', context)
 
 def login(request):
-    return render(request, 'databaseapp/login.html')
+    if request.method != 'POST':
+        form = loginForm()
+    else:
+        form = loginForm(data = request.POST)
+        users_list = Users.objects.order_by('user_id')
+        if (users_list.filter(login=request.POST['login'], password=request.POST['password']).exists()):
+            print("Exist")
+            return redirect('databaseapp:userPanel')
+        #nieudane logowanie - tymczasowo strona glowna
+        else:
+            return redirect('databaseapp:index')
+    context = {'form': form}
+    return render(request, 'databaseapp/login.html', context)
 
 def signUp(request):
     if request.method != 'POST':
@@ -33,3 +45,6 @@ def browse(request):
     
     context = {'rooms_list': rooms_list, 'reservation_list': reservation_list}
     return render(request, 'databaseapp/browse.html', context)
+
+def userPanel(request):
+    return render(request, 'databaseapp/userPanel.html')

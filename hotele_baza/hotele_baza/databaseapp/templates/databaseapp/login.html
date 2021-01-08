@@ -1,12 +1,14 @@
 ﻿{% extends "databaseapp/base.html" %}
 
 {% block content %}
-    <div class="loginbuttons">
-        <label for="userlogin">Your login:</label> 
-        <input type="text" name="userlogin" id="userlogin" />
-        <br/>
-        <label for="userpassword">Your password:</label> 
-        <input type="password" name="userpassword" id="userpassword" />
+    <div class="loginform">
+
+        <label>Login panel:</label> 
+        <form action="{% url 'databaseapp:login' %}" method='post'>
+        {% csrf_token %}
+        {{form.as_p}}
+        <button name="signUpBtn" type="submit">Sign in</button>
+        </form>
     </div>
     
 {% endblock content %} 

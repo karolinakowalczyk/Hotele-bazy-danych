@@ -10,3 +10,12 @@ class SignUpForm(forms.ModelForm):
             'password': forms.PasswordInput,
             'email': forms.EmailInput,
         }
+
+class loginForm(forms.ModelForm):
+    class Meta:
+        model = Users
+        fields = ['login', 'password']
+        labels = {'login': 'login', 'password': 'password'}
+        widgets = {
+            'password': forms.PasswordInput,
+        }
