@@ -50,6 +50,8 @@
   <ItemGroup>
     <Content Include="databaseapp\templates\databaseapp\base.html" />
     <Content Include="databaseapp\templates\databaseapp\index.html" />
+    <Content Include="databaseapp\templates\databaseapp\login.html" />
+    <Content Include="databaseapp\templates\databaseapp\signUp.html" />
     <Content Include="requirements.txt" />
   </ItemGroup>
   <ItemGroup>

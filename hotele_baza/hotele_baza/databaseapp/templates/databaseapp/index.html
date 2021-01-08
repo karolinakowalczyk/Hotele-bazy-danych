@@ -1,18 +1,13 @@
-<!--<!DOCTYPE HTML>
-<head>
-    <meta charset="utf-8" />
-    <title>Hotels</title>
-    <meta name="description" content="Book your dream room!" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-</head>
-<body>
-    <p>Welcome to our hotel chain!</p>
-    <p>Book your dream room in comfortable conditions throughout Poland!</p>
-</body>-->
 {% extends "databaseapp/base.html" %}
 
 {% block content %} 
     <p>Book your dream room in comfortable conditions throughout Poland!</p>
+    <div class="basic_buttons">
+        <input type="button" onclick="location.href='signUp';" value="Sign Up" />
+        <input type="button" onclick="location.href='login';" value="Sign in" />
+        <button type="button">Show free rooms</button>
+    </div>
+    
     {% if user_list %}
         <ul>
         {% for user in user_list %}
