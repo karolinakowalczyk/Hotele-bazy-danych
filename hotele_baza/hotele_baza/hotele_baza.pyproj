@@ -48,11 +48,14 @@
     <Compile Include="hotele_baza\wsgi.py" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="databaseapp\templates\databaseapp\index.html" />
     <Content Include="requirements.txt" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="databaseapp\" />
     <Folder Include="databaseapp\migrations\" />
+    <Folder Include="databaseapp\templates\" />
+    <Folder Include="databaseapp\templates\databaseapp\" />
     <Folder Include="hotele_baza\" />
   </ItemGroup>
   <ItemGroup>
