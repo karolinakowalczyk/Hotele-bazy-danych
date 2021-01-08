@@ -2,8 +2,14 @@
 
 {% block content %} 
      <div class="signupbuttons">
-        <label for="userlogin">Your login:</label> 
-        <input type="text" name="userlogin" id="userlogin" />
+
+        <label>Your login:</label> 
+        <form action="{% url 'databaseapp:signUp' %}" method='post'>
+        {% csrf_token %}
+        {{form.as_p}}
+        <button name="signUpBtn" type="submit">Sign up</button>
+        </form>
+        <!--- <input type="text" name="userlogin" id="userlogin" />
         <br>
         <label for="userpassword">Your password:</label> 
         <input type="password" name="userpassword" id="userpassword" />
@@ -19,6 +25,6 @@
         <br>
         <label for="usersurname">Your surname:</label> 
         <input type="text" name="usersurname" id="usersurname" />
-         <br>
+         <br>-->
     </div>
 {% endblock content %} 
