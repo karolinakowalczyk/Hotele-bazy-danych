@@ -1,0 +1,13 @@
+﻿{% extends "databaseapp/base.html" %}
+
+{% block content %} 
+     {% if rooms_list %}
+        <ul>
+        {% for room in rooms_list %}
+            <li> {{ room.room_id }} </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No polls are available.</p>
+    {% endif %}
+{% endblock content %} 
