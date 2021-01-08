@@ -48,6 +48,7 @@
     <Compile Include="hotele_baza\wsgi.py" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="databaseapp\templates\databaseapp\base.html" />
     <Content Include="databaseapp\templates\databaseapp\index.html" />
     <Content Include="requirements.txt" />
   </ItemGroup>

@@ -1,9 +1,26 @@
-<!DOCTYPE HTML>
+<!--<!DOCTYPE HTML>
 <head>
     <meta charset="utf-8" />
-    <title>Siec hoteli</title>
-    <meta name="description" content="Zarezerwuj pokoj marzen" />
+    <title>Hotels</title>
+    <meta name="description" content="Book your dream room!" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 </head>
-<p>Witaj w naszej sieci hoteli!</p>
-<p>Zarezerwuj pokmarzen w komfortowych warunkach w calej Polsce!</p>
+<body>
+    <p>Welcome to our hotel chain!</p>
+    <p>Book your dream room in comfortable conditions throughout Poland!</p>
+</body>-->
+{% extends "databaseapp/base.html" %}
+
+{% block content %} 
+    <p>Book your dream room in comfortable conditions throughout Poland!</p>
+    {% if user_list %}
+        <ul>
+        {% for user in user_list %}
+            <li><a href="/users/{{ user.user_id }}/">{{ user.surname }}</a></li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No polls are available.</p>
+    {% endif %}
+{% endblock content %} 
+    
