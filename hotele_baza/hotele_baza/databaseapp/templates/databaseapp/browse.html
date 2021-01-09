@@ -1,6 +1,16 @@
 ﻿{% extends "databaseapp/base.html" %}
 
 {% block content %} 
+    <div class="browseform">
+
+        <label>Sign up panel:</label> 
+        <form action="{% url 'databaseapp:browse' %}" method='post'>
+        {% csrf_token %}
+        {{form.as_p}}
+        <button name="signUpBtn" type="submit">Sign up</button>
+        </form>
+    </div>
+
      {% if rooms_list %}
         <ul>
         {% for room in rooms_list %}

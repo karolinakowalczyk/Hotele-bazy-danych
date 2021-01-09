@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 #from django.contrib.auth.forms import UserCreationForm
 from .models import Users, Rooms, Reservations
-from .forms import SignUpForm, loginForm
+from .forms import SignUpForm, loginForm, BrowseForm
 from datetime import date
 
 
@@ -37,13 +37,20 @@ def signUp(request):
     return render(request, 'databaseapp/signUp.html', context)
 
 def browse(request):
+    if request.method != 'POST':
+        form = BrowseForm()
+    else:
+        form = BrowseForm(data = request.POST)
+        if form.is_valid():
+            form.save
+            return redirect('databaseapp:index')
     today = date.today()
     rooms_list = Rooms.objects.order_by('room_id')
     rooms_list = rooms_list.filter(hotel=2)
     reservation_list = Reservations.objects.order_by('room')
     reservation_list = reservation_list.filter(date_start__lte=today, date_end__gte=today)
     
-    context = {'rooms_list': rooms_list, 'reservation_list': reservation_list}
+    context = {'rooms_list': rooms_list, 'reservation_list': reservation_list, 'form': form}
     return render(request, 'databaseapp/browse.html', context)
 
 def userPanel(request):
