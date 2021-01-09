@@ -1,8 +1,13 @@
 ﻿{% extends "databaseapp/base.html" %}
 
 {% block content %}
-    <div class="loginbuttons">
-        <p>user panel</p>
+    <div class="userbuttons">
+        <input type="button" onclick="location.href={% url 'databaseapp:addReservation' %}" value="Add reservation" />
+        <br>
+        <input type="button" onclick="location.href={% url 'databaseapp:deleteReservation' %}" value="Delete reservation" />
+        <br>
+        <input type="button" onclick="location.href={% url 'databaseapp:showUserReservation' %}" value="Show my reservations" />
+
     </div>
     
 {% endblock content %} 

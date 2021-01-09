@@ -1,5 +1,5 @@
 from django import forms
-from .models import Users, Locations, Hotels
+from .models import Users, Locations, Hotels, Reservations
 from datetime import date
 
 class SignUpForm(forms.ModelForm):

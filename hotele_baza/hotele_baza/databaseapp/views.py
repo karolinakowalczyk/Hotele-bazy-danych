@@ -11,14 +11,21 @@ def index(request):
     return render(request, 'databaseapp/index.html', context)
 
 def login(request):
+    currentUserId = 0 #ustawić jako globalny?
     if request.method != 'POST':
         form = loginForm()
     else:
         form = loginForm(data = request.POST)
         users_list = Users.objects.order_by('user_id')
-        if (users_list.filter(login=request.POST['login'], password=request.POST['password']).exists()):
-            print("Exist")
-            return redirect('databaseapp:userPanel')
+        if (users_list.filter(login=request.POST['login'], password=request.POST['password']).exists()): 
+           currentUserLogin=request.POST['login']
+           currentUser = Users.objects.all().get(login=currentUserLogin)
+           currentUserId = currentUser.user_id
+           currentUserRole = currentUser.role
+           if currentUserRole == "admin" :
+               return redirect('databaseapp:adminPanel')
+           else:
+               return redirect('databaseapp:userPanel')
         #nieudane logowanie - tymczasowo strona glowna
         else:
             return redirect('databaseapp:index')
@@ -55,3 +62,15 @@ def browse(request):
 
 def userPanel(request):
     return render(request, 'databaseapp/userPanel.html')
+
+def addReservation(request):
+    return render(request, 'databaseapp/addReservation.html')
+
+def deleteReservation(request):
+    return render(request, 'databaseapp/deleteReservation.html')
+
+def showUserReservation(request):
+    return render(request, 'databaseapp/showUserReservation.html')
+
+def adminPanel(request):
+    return render(request, 'databaseapp/adminPanel.html')
