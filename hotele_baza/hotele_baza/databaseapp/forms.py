@@ -1,5 +1,6 @@
 from django import forms
 from .models import Users, Locations, Hotels
+from datetime import date
 
 class SignUpForm(forms.ModelForm):
     class Meta:
@@ -26,3 +27,5 @@ class BrowseForm(forms.Form):
         loc = ""+h.location.city+", "+h.location.street+" "+str(h.location.number)
         LOCATIONS.append((h.hotel_id,loc))
     loc = forms.CharField(label='test:', widget=forms.Select(choices=LOCATIONS))
+    dateS = forms.DateField(label='dateStart', widget=forms.SelectDateWidget(years=range(date.today().year,date.today().year+4)))
+    dateE = forms.DateField(label='dateEnd', widget=forms.SelectDateWidget(years=range(date.today().year,date.today().year+4)))
