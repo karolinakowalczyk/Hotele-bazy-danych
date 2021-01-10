@@ -1,4 +1,5 @@
 from django import forms
+from django.core.exceptions import ValidationError
 from .models import Users, Locations, Hotels, Reservations
 from datetime import date
 
@@ -29,3 +30,16 @@ class BrowseForm(forms.Form):
     loc = forms.CharField(label='test:', widget=forms.Select(choices=LOCATIONS))
     dateS = forms.DateField(label='dateStart', widget=forms.SelectDateWidget(years=range(date.today().year,date.today().year+4)))
     dateE = forms.DateField(label='dateEnd', widget=forms.SelectDateWidget(years=range(date.today().year,date.today().year+4)))
+    animals = forms.BooleanField(label='animals?', required=False)
+
+    def clean(self):
+        cleaned_data = super().clean()
+        ds = cleaned_data.get("dateS")
+        de = cleaned_data.get("dateE")
+
+        if de < date.today():
+            self.add_error('dateE',"The dates cannot be in the past")
+        if ds < date.today():
+            self.add_error('dateS',"The dates cannot be in the past")
+        if ds > de:
+            self.add_error('dateE','Start date must be before end date')

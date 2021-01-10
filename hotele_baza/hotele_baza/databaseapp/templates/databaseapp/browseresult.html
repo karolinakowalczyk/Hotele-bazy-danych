@@ -27,7 +27,7 @@
                 <th>{{ room.price}} </th>
                 <th>{{ room.animals}} </th>
                 {% if user != 0 %}
-                    <th><a href = "{% url 'databaseapp:index' %}"> Main site </a> </th>
+                    <th><a href = "../{{room.room_id}}/addReservation/{{date_start.year}}-{{date_start.month}}-{{date_start.day}}_{{date_end.year}}-{{date_end.month}}-{{date_end.day}}"> Book now </a> </th>
                 {% endif %}
             </tr>
         {% endfor %}    

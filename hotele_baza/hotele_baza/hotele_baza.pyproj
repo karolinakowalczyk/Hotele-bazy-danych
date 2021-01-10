@@ -3,7 +3,7 @@
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <Name>hotele_baza</Name>
     <RootNamespace>hotele_baza</RootNamespace>
-    <InterpreterId>Global|PythonCore|3.9</InterpreterId>
+    <InterpreterId>Global|PythonCore|3.7</InterpreterId>
     <TestFramework>Pytest</TestFramework>
   </PropertyGroup>
   <PropertyGroup>

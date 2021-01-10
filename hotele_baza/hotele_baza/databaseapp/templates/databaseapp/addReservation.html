@@ -4,5 +4,10 @@
     <div class="addreservationfrom">
         <p>add reservatrion</p>
     </div>
-    
+Czy chcesz potwierdzic rezerwację w terminie 
+<br />
+{{date_start.date}} - {{date_end.date}}
+    <br />
+<input type="button" onclick="location.href='confirm'" value="Yes" />
+<input type="button" onclick="window.history.back(); return false;" value="No" />
 {% endblock content %} 

@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 #from django.contrib.auth.forms import UserCreationForm
 from .models import Users, Rooms, Reservations
 from .forms import SignUpForm, loginForm, BrowseForm
+import datetime
 from datetime import date, timedelta
 import logging
 
@@ -54,7 +55,9 @@ def browse(request):
         hotelId = request.POST['loc'][0]
         dateS = date(int(request.POST['dateS_year']),int(request.POST['dateS_month']),int(request.POST['dateS_day']))
         dateE = date(int(request.POST['dateE_year']),int(request.POST['dateE_month']),int(request.POST['dateE_day']))
-        return browseResult(request, hotelId, dateS, dateE)
+        an = request.POST.get('animals', False)
+        if form.is_valid():
+            return browseResult(request, hotelId, dateS, dateE, an)
     today = date.today()
     rooms_list = Rooms.objects.order_by('room_id')
     rooms_list = rooms_list.filter(hotel=1)
@@ -63,14 +66,15 @@ def browse(request):
     context = {'rooms_list': rooms_list, 'reservation_list': reservation_list, 'form': form}
     return render(request, 'databaseapp/browse.html', context)
 
-def browseResult(request, hotel_id, ds, de):
+def browseResult(request, hotel_id, ds, de, an):
     reservation_list = Reservations.objects.order_by('room')
     reservation_list = conflictingReservations(reservation_list, ds, de)
     rooms_list = Rooms.objects.order_by('room_id')
     for res in reservation_list:
         rooms_list = rooms_list.exclude(room_id = res.room.room_id)
         print(res.room.room_id)
-    rooms_list = rooms_list.filter(hotel = hotel_id)
+    if an:
+        rooms_list = rooms_list.filter(hotel = hotel_id).exclude(animals=0)
     for r in rooms_list:
         print(r.room_id)
     context = {'rooms': rooms_list, 'date_start':ds, 'date_end':de, 'user':currentUserId}
@@ -86,8 +90,11 @@ def conflictingReservations(r, ds, de):
 def userPanel(request):
     return render(request, 'databaseapp/userPanel.html')
 
-def addReservation(request):
-    return render(request, 'databaseapp/addReservation.html')
+def addReservation(request, room_id, date_start, date_end):
+    ds = datetime.datetime.strptime(date_start, '%Y-%m-%d')
+    de = datetime.datetime.strptime(date_end, '%Y-%m-%d')
+    context = {'room_id':room_id, 'date_start':ds,'date_end':de}
+    return render(request, 'databaseapp/addReservation.html', context)
 
 def deleteReservation(request, reservation_id):
     context = {'reservation_id':reservation_id}
@@ -116,3 +123,11 @@ def signOut(request):
     global currentUserId
     currentUserId = 0
     return redirect('databaseapp:index')
+
+def confirmReservation(request, room_id, date_start, date_end):
+    ds = datetime.datetime.strptime(date_start, '%Y-%m-%d')
+    de = datetime.datetime.strptime(date_end, '%Y-%m-%d')
+    res = Reservations(room=Rooms.objects.get(room_id=room_id), user=Users.objects.get(user_id=currentUserId), date_start=ds, date_end=de)
+    res.save()
+    return redirect('databaseapp:showUserReservation')
+
