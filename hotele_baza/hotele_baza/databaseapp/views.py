@@ -4,14 +4,14 @@ from .models import Users, Rooms, Reservations
 from .forms import SignUpForm, loginForm, BrowseForm
 from datetime import date
 
+currentUserId = 0
 
 def index(request):
     user_list = Users.objects.order_by('surname')[:5]
-    context = {'user_list': user_list}
+    context = {'user_list': user_list, 'user':currentUserId}
     return render(request, 'databaseapp/index.html', context)
 
 def login(request):
-    currentUserId = 0 #ustawić jako globalny? #najlepiej, bo plannujemy odnosić się do tego w innych klasach
     if request.method != 'POST':
         form = loginForm()
     else:
@@ -20,6 +20,7 @@ def login(request):
         if (users_list.filter(login=request.POST['login'], password=request.POST['password']).exists()): 
            currentUserLogin=request.POST['login']
            currentUser = Users.objects.all().get(login=currentUserLogin)
+           global currentUserId
            currentUserId = currentUser.user_id
            currentUserRole = currentUser.role
            if currentUserRole == "admin" :
@@ -70,7 +71,7 @@ def browseResult(request, hotel_id, ds, de):
     rooms_list = rooms_list.filter(hotel = hotel_id)
     for r in rooms_list:
         print(r.room_id)
-    context = {'rooms': rooms_list, 'date_start':ds, 'date_end':de}
+    context = {'rooms': rooms_list, 'date_start':ds, 'date_end':de, 'user':currentUserId}
     return render(request, 'databaseapp/browseresult.html', context)
 
 def conflictingReservations(r, ds, de):
