@@ -13,4 +13,5 @@ urlpatterns = [
         path('deleteReservation/', views.deleteReservation, name='deleteReservation'),
         path('showUserReservation/', views.showUserReservation, name='showUserReservation'),
         path('adminPanel/', views.adminPanel, name='adminPanel'),
+        path('browse/results', views.browseResult, name='browseresults')
     ]
