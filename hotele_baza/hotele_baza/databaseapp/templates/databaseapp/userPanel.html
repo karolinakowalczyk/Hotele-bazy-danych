@@ -2,9 +2,7 @@
 
 {% block content %}
     <div class="userbuttons">
-        <input type="button" onclick="location.href={% url 'databaseapp:addReservation' %}" value="Add reservation" />
-        <br>
-        <input type="button" onclick="location.href={% url 'databaseapp:deleteReservation' %}" value="Delete reservation" />
+        <input type="button" value="Show rooms" />
         <br>
         <input type="button" onclick="location.href={% url 'databaseapp:showUserReservation' %}" value="Show my reservations" />
 

@@ -10,8 +10,9 @@ urlpatterns = [
         path('browse/', views.browse, name='browse'),
         path('userPanel/', views.userPanel, name='userPanel'),
         path('addReservation/', views.addReservation, name='addReservation'),
-        path('deleteReservation/', views.deleteReservation, name='deleteReservation'),
+        path('<int:reservation_id>/deleteReservation/', views.deleteReservation, name='deleteReservation'),
         path('showUserReservation/', views.showUserReservation, name='showUserReservation'),
         path('adminPanel/', views.adminPanel, name='adminPanel'),
-        path('browse/results', views.browseResult, name='browseresults')
+        path('browse/results', views.browseResult, name='browseresults'),
+        path('<int:reservation_id>/deleteCurrentReservation/', views.deleteCurrentReservation, name='deleteCurrentReservation'),
     ]

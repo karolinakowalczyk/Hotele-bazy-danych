@@ -87,11 +87,20 @@ def userPanel(request):
 def addReservation(request):
     return render(request, 'databaseapp/addReservation.html')
 
-def deleteReservation(request):
-    return render(request, 'databaseapp/deleteReservation.html')
+def deleteReservation(request, reservation_id):
+    context = {'reservation_id':reservation_id}
+    return render(request, 'databaseapp/deleteReservation.html', context)
+
+def deleteCurrentReservation(request, reservation_id):
+    reservationToDelete = Reservations.objects.get(reservation_id=reservation_id)
+    reservationToDelete.delete()
+    return redirect('databaseapp:showUserReservation')
 
 def showUserReservation(request):
-    return render(request, 'databaseapp/showUserReservation.html')
+    reservation_list = Reservations.objects.order_by('reservation_id')
+    reservation_list = reservation_list.filter(user = currentUserId)
+    context = {'user':currentUserId, 'reservations' :reservation_list}
+    return render(request, 'databaseapp/showUserReservation.html', context)
 
 def adminPanel(request):
     return render(request, 'databaseapp/adminPanel.html')

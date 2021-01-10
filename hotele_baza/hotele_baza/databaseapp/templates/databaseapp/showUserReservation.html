@@ -1,8 +1,27 @@
 ﻿{% extends "databaseapp/base.html" %}
 
 {% block content %}
-    <div class="showuserreservationfrom">
-      <p>showuserreservation</p>
-    </div>
+    <p>Current user:</p>
+    <p>{{user}}</p>
+<table>
+     {% if reservations %}
+        <tr>
+        <th>Numer pokoju:</th>
+        <th>Data przyjazdu:</th>
+        <th>Data odjazdu:</th>
+        </tr>
+        {% for reservations in reservations %}
+            <tr>
+                <th>{{ reservations.room.number}} </th>
+                <th>{{ reservations.date_start}} </th>
+                <th>{{ reservations.date_end}} </th>
+                <th><a href = "../{{reservations.reservation_id}}/deleteReservation"> Delete reservation </a> </th>
+            </tr>
+        {% endfor %}    
+    {% else %}
+        <tr><th>You don't have any reservation.</th></tr>
+    {% endif %}
+    
+</table>
     
 {% endblock content %} 

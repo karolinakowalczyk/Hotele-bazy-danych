@@ -2,7 +2,9 @@
 
 {% block content %}
     <div class="deletereservationfrom">
-        <p>delete reservatrion</p>
+        <p>Are you sure?</p>
+        {{reservation_id}}
+        <input type="button" onclick="location.href='../../{{reservation_id}}/deleteCurrentReservation';" value="Yes" />
     </div>
     
 {% endblock content %} 
