@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from .models import Users, Rooms, Reservations
 from .forms import SignUpForm, loginForm, BrowseForm
 from datetime import date
-
+currentUserId = 0
 
 def index(request):
     user_list = Users.objects.order_by('surname')[:5]
@@ -11,7 +11,8 @@ def index(request):
     return render(request, 'databaseapp/index.html', context)
 
 def login(request):
-    currentUserId = 0 #ustawić jako globalny?
+    global currentUserId
+    #currentUserId = 0 #ustawić jako globalny?
     if request.method != 'POST':
         form = loginForm()
     else:
@@ -70,6 +71,9 @@ def deleteReservation(request):
     return render(request, 'databaseapp/deleteReservation.html')
 
 def showUserReservation(request):
+    #reservations_list = Reservations.objects.order_by('reservtions_id')
+    #context = {'reservations_list': reservations_list}
+    #return render(request, 'databaseapp/showUserReservation.html', context)
     return render(request, 'databaseapp/showUserReservation.html')
 
 def adminPanel(request):
