@@ -1,0 +1,34 @@
+﻿{% extends "databaseapp/base.html" %}
+
+{% block content %}
+    <p>Podano dane:</p>
+<ul>
+    <li>{{date_start}}</li>
+    <li>{{date_end}}</li>
+</ul>
+
+<table>
+    <tr>
+        <th>Numer pokoju:</th>
+        <th>Piętro:</th>
+        <th>Rozmiar:</th>
+        <th>Cena:</th>
+        <th>Zwierzęta:</th>
+    </tr>
+     {% if rooms %}
+        {% for room in rooms %}
+            <tr>
+                <th>{{ room.number }} </th>
+                <th>{{ room.floor}} </th>
+                <th>{{ room.size}} </th>
+                <th>{{ room.price}} </th>
+                <th>{{ room.animals}} </th>
+            </tr>
+        {% endfor %}    
+    {% else %}
+        <tr><th>No polls are available.</th></tr>
+    {% endif %}
+    
+</table>
+    
+{% endblock content %} 

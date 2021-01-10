@@ -11,7 +11,7 @@ def index(request):
     return render(request, 'databaseapp/index.html', context)
 
 def login(request):
-    currentUserId = 0 #ustawić jako globalny?
+    currentUserId = 0 #ustawić jako globalny? #najlepiej, bo plannujemy odnosić się do tego w innych klasach
     if request.method != 'POST':
         form = loginForm()
     else:
@@ -48,17 +48,37 @@ def browse(request):
         form = BrowseForm()
     else:
         form = BrowseForm(data = request.POST)
-        if form.is_valid():
-            form.save
-            return redirect('databaseapp:index')
+        hotelId = request.POST['loc'][0]
+        dateS = date(int(request.POST['dateS_year']),int(request.POST['dateS_month']),int(request.POST['dateS_day']))
+        dateE = date(int(request.POST['dateE_year']),int(request.POST['dateE_month']),int(request.POST['dateE_day']))
+        return browseResult(request, hotelId, dateS, dateE)
     today = date.today()
     rooms_list = Rooms.objects.order_by('room_id')
-    rooms_list = rooms_list.filter(hotel=2)
+    rooms_list = rooms_list.filter(hotel=1)
     reservation_list = Reservations.objects.order_by('room')
     reservation_list = reservation_list.filter(date_start__lte=today, date_end__gte=today)
-    
     context = {'rooms_list': rooms_list, 'reservation_list': reservation_list, 'form': form}
     return render(request, 'databaseapp/browse.html', context)
+
+def browseResult(request, hotel_id, ds, de):
+    reservation_list = Reservations.objects.order_by('room')
+    reservation_list = conflictingReservations(reservation_list, ds, de)
+    rooms_list = Rooms.objects.order_by('room_id')
+    for res in reservation_list:
+        rooms_list = rooms_list.exclude(room_id = res.room.room_id)
+        print(res.room.room_id)
+    rooms_list = rooms_list.filter(hotel = hotel_id)
+    for r in rooms_list:
+        print(r.room_id)
+    context = {'rooms': rooms_list, 'date_start':ds, 'date_end':de}
+    return render(request, 'databaseapp/browseresult.html', context)
+
+def conflictingReservations(r, ds, de):
+    a = r.filter(date_start__lte=ds, date_end__gte=de)
+    b = r.filter(date_start__gte=ds, date_start__lte=de)
+    c = r.filter(date_end__gte=ds, date_end__lte=de)
+    d = a.union(b,c)
+    return d
 
 def userPanel(request):
     return render(request, 'databaseapp/userPanel.html')
