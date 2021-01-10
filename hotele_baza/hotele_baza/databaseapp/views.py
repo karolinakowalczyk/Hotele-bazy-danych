@@ -2,7 +2,9 @@ from django.shortcuts import render, redirect
 #from django.contrib.auth.forms import UserCreationForm
 from .models import Users, Rooms, Reservations
 from .forms import SignUpForm, loginForm, BrowseForm
-from datetime import date
+from datetime import date, timedelta
+import logging
+
 
 currentUserId = 0
 
@@ -91,15 +93,20 @@ def deleteReservation(request, reservation_id):
     context = {'reservation_id':reservation_id}
     return render(request, 'databaseapp/deleteReservation.html', context)
 
-def deleteCurrentReservation(request, reservation_id):
+def deleteCurrentReservation(request, reservation_id):  
     reservationToDelete = Reservations.objects.get(reservation_id=reservation_id)
     reservationToDelete.delete()
     return redirect('databaseapp:showUserReservation')
 
 def showUserReservation(request):
+    deleteFailed = False
     reservation_list = Reservations.objects.order_by('reservation_id')
     reservation_list = reservation_list.filter(user = currentUserId)
-    context = {'user':currentUserId, 'reservations' :reservation_list}
+    reservations_not_delete = reservation_list.filter(date_start__lte = (date.today() + timedelta(hours=48)))
+    reservations_past = reservation_list.filter(date_end__lt = date.today())
+    reservations_current = reservation_list.filter(date_start__gte = date.today())
+    context = {'user':currentUserId, 'reservations' :reservation_list, 'reservations_not_delete' :reservations_not_delete, 'reservations_past' :reservations_past, 'reservations_current' :reservations_current}
+    #context = {'user':currentUserId, 'reservations' :reservation_list}
     return render(request, 'databaseapp/showUserReservation.html', context)
 
 def adminPanel(request):

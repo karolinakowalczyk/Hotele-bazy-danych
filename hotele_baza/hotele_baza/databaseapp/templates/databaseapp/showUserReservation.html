@@ -3,6 +3,8 @@
 {% block content %}
     <p>Current user:</p>
     <p>{{user}}</p>
+<br />
+<p>Past reservations</p>
 <table>
      {% if reservations %}
         <tr>
@@ -10,12 +12,38 @@
         <th>Data przyjazdu:</th>
         <th>Data odjazdu:</th>
         </tr>
-        {% for reservations in reservations %}
+        {% for reservations in reservations_past %}
             <tr>
                 <th>{{ reservations.room.number}} </th>
                 <th>{{ reservations.date_start}} </th>
                 <th>{{ reservations.date_end}} </th>
+                <th>you can not delete this reservation</th>
+            </tr>
+        {% endfor %}
+        
+    {% else %}
+        <tr><th>You don't have any past reservation.</th></tr>
+    {% endif %}  
+</table>
+<br />
+<p>Current reservations</p>
+<table>
+     {% if reservations %}
+        <tr>
+        <th>Numer pokoju:</th>
+        <th>Data przyjazdu:</th>
+        <th>Data odjazdu:</th>
+        </tr>
+        {% for reservations in reservations_current %}
+            <tr>
+                <th>{{ reservations.room.number}} </th>
+                <th>{{ reservations.date_start}} </th>
+                <th>{{ reservations.date_end}} </th>
+                {% if reservations in reservations_not_delete %}
+                   <th>you can not delete this reservation</th>
+                {% else %}
                 <th><a href = "../{{reservations.reservation_id}}/deleteReservation"> Delete reservation </a> </th>
+                {% endif %}
             </tr>
         {% endfor %}    
     {% else %}
