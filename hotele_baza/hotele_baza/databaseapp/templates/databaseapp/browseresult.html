@@ -14,6 +14,9 @@
         <th>Rozmiar:</th>
         <th>Cena:</th>
         <th>Zwierzęta:</th>
+        {% if user != 0 %}
+            <th></th>
+        {% endif %}
     </tr>
      {% if rooms %}
         {% for room in rooms %}
@@ -23,6 +26,9 @@
                 <th>{{ room.size}} </th>
                 <th>{{ room.price}} </th>
                 <th>{{ room.animals}} </th>
+                {% if user != 0 %}
+                    <th><a href = "{% url 'databaseapp:index' %}"> Main site </a> </th>
+                {% endif %}
             </tr>
         {% endfor %}    
     {% else %}
