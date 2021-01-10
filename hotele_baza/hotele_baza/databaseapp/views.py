@@ -104,3 +104,8 @@ def showUserReservation(request):
 
 def adminPanel(request):
     return render(request, 'databaseapp/adminPanel.html')
+
+def signOut(request):
+    global currentUserId
+    currentUserId = 0
+    return redirect('databaseapp:index')
