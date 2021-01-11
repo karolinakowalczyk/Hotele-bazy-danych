@@ -2,12 +2,24 @@
 
 {% block content %} 
 <p>User: {{user}}</p>
+<p>User role: {{userRole}}</p>
+
     <p>Book your dream room in comfortable conditions throughout Poland!</p>
     <div class="basic_buttons">
-        <input type="button" onclick="location.href='signUp';" value="Sign Up" />
-        <input type="button" onclick="location.href='login';" value="Sign in" />
-        <input type="button" onclick="location.href='browse';" value="Show free rooms" />
-        <input type="button" onclick="location.href={% url 'databaseapp:signOut' %}" value="Sign out" />
+        {% if user == 0 %}
+            <input type="button" onclick="location.href='signUp';" value="Sign Up" />
+            <input type="button" onclick="location.href='login';" value="Sign in" />
+            <input type="button" onclick="location.href='browse';" value="Show free rooms" />
+        {% else %}
+            {% if userRole == "admin" %}
+                <input type="button" onclick="location.href={% url 'databaseapp:adminPanel' %}" value="Go to admin panel" />
+                <input type="button" onclick="location.href={% url 'databaseapp:signOut' %}" value="Sign out" />
+            {% elif userRole != "none" %}
+                <input type="button" onclick="location.href={% url 'databaseapp:userPanel' %}" value="Go to user panel" />
+                <input type="button" onclick="location.href='browse';" value="Show free rooms" />
+                <input type="button" onclick="location.href={% url 'databaseapp:signOut' %}" value="Sign out" />
+            {% endif %} 
+        {% endif %}
     </div>
     
     {% if user_list %}

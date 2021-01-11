@@ -11,7 +11,12 @@ currentUserId = 0
 
 def index(request):
     user_list = Users.objects.order_by('surname')[:5]
-    context = {'user_list': user_list, 'user':currentUserId}
+    currentUserRole = "none"
+    if(currentUserId!=0):
+        currentUser = Users.objects.all().get(user_id=currentUserId)
+        currentUserRole = currentUser.role
+
+    context = {'user_list': user_list, 'user': currentUserId, 'userRole' : currentUserRole}
     return render(request, 'databaseapp/index.html', context)
 
 def login(request):
