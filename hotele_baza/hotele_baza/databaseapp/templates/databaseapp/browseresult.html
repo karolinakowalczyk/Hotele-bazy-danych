@@ -1,7 +1,7 @@
 ﻿{% extends "databaseapp/base.html" %}
 
 {% block content %}
-    <p>Podano dane:</p>
+    <p>Selected period:</p>
 <ul>
     <li>{{date_start}}</li>
     <li>{{date_end}}</li>
@@ -9,11 +9,11 @@
 
 <table>
     <tr>
-        <th>Numer pokoju:</th>
-        <th>Piętro:</th>
-        <th>Rozmiar:</th>
-        <th>Cena:</th>
-        <th>Zwierzęta:</th>
+        <th>Room:</th>
+        <th>Floor:</th>
+        <th>Size:</th>
+        <th>Price:</th>
+        <th>Animals:</th>
         {% if user != 0 %}
             <th></th>
         {% endif %}
@@ -32,7 +32,7 @@
             </tr>
         {% endfor %}    
     {% else %}
-        <tr><th>No polls are available.</th></tr>
+        <tr><th>No available rooms match your criteria.</th></tr>
     {% endif %}
     
 </table>

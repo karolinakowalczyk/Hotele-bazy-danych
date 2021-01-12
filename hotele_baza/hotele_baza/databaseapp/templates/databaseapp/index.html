@@ -17,6 +17,9 @@
                 <li class="nav-item">
                     <button class="nav-link" onclick ="location.href={% url 'databaseapp:browse' %}">Show free rooms</button>
                 </li>
+                <li class="nav-item">
+                    <button class="nav-link" onclick ="location.href={% url 'databaseapp:prices' %}">Check prices</button>
+                </li>
             {% else %}
                 {% if userRole == "admin" %}
                     <li class="nav-item">
@@ -29,6 +32,9 @@
                         <button class="nav-link" onclick ="location.href={% url 'databaseapp:browse' %}">Show free rooms</button>
                     </li>
                     <li class="nav-item">
+                        <button class="nav-link" onclick ="location.href={% url 'databaseapp:prices' %}">Check prices</button>
+                    </li>
+                    <li class="nav-item">
                         <button class="nav-link" onclick ="location.href={% url 'databaseapp:signOut' %}">Sign out</button>
                     </li>
                 {% elif userRole != "none" %}
@@ -37,6 +43,9 @@
                     </li>
                     <li class="nav-item">
                         <button class="nav-link" onclick ="location.href={% url 'databaseapp:browse' %}">Show free rooms</button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="nav-link" onclick ="location.href={% url 'databaseapp:prices' %}">Check prices</button>
                     </li>
                     <li class="nav-item">
                         <button class="nav-link" onclick ="location.href={% url 'databaseapp:signOut' %}">Sign out</button>
@@ -56,40 +65,6 @@
     {% endblock page_header %}
 
 
-    <!--<div class="basic_buttons">
-        {% if user == 0 %}
-            <input type="button" onclick="location.href='signUp';" value="Sign Up" />
-            <br />
-            <input type="button" onclick="location.href='login';" value="Sign in" />
-            <br />
-            <input type="button" onclick="location.href='browse';" value="Show free rooms" />
-        {% else %}
-            {% if userRole == "admin" %}
-                <input type="button" onclick="location.href={% url 'databaseapp:adminPanel' %}" value="Go to admin panel" />
-                <br />
-                <input type="button" onclick="location.href={% url 'databaseapp:userPanel' %}" value="Go to user panel" />
-                <br />
-                <input type="button" onclick="location.href='browse';" value="Show free rooms" />
-                <br />
-                <input type="button" onclick="location.href={% url 'databaseapp:signOut' %}" value="Sign out" />
-            {% elif userRole != "none" %}
-                <input type="button" onclick="location.href={% url 'databaseapp:userPanel' %}" value="Go to user panel" />
-                <br />
-                <input type="button" onclick="location.href='browse';" value="Show free rooms" />
-                <br />
-                <input type="button" onclick="location.href={% url 'databaseapp:signOut' %}" value="Sign out" />
-            {% endif %} 
-        {% endif %}
-    </div> -->
-    <!-- 
-    {% if user_list %}
-        <ul>
-        {% for user in user_list %}
-            <li><a href="/users/{{ user.user_id }}/">{{ user.surname }}</a></li>
-        {% endfor %}
-        </ul>
-    {% else %}
-        <p>No polls are available.</p>
-    {% endif %}-->
+    
 {% endblock content %} 
     

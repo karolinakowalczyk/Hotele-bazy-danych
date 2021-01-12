@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
 #from django.contrib.auth.forms import UserCreationForm
-from .models import Users, Rooms, Reservations
-from .forms import SignUpForm, loginForm, BrowseForm
+from django.db import connections
+from .models import Users, Rooms, Reservations, Hotels, Locations
+from .forms import SignUpForm, loginForm, BrowseForm, HotelsForm
 import datetime
 from datetime import date, timedelta
 import logging
@@ -135,4 +136,33 @@ def confirmReservation(request, room_id, date_start, date_end):
     res = Reservations(room=Rooms.objects.get(room_id=room_id), user=Users.objects.get(user_id=currentUserId), date_start=ds, date_end=de)
     res.save()
     return redirect('databaseapp:showUserReservation')
+
+def guests(request):
+    if request.method != 'POST':
+        form = HotelsForm()
+    else:
+        form = HotelsForm(data = request.POST)
+        hotelId = request.POST['loc'][0]
+        if form.is_valid():
+            return showGuests(request, hotelId, form)
+        else:
+            form = HotelsForm()
+    checked = False;
+    context = {'form': form, 'checked':checked}
+    return render(request, 'databaseapp/guests.html', context)
+
+def showGuests(request, hotelId, form):
+    with connections['default'].cursor() as cursor:
+        cursor.execute("CALL guests_in_hotel(%s);" % hotelId)
+        guests_list = cursor.fetchall()
+    checked = True;
+    context = {'guests_list': guests_list, 'form': form,'checked':checked}
+    return render(request, 'databaseapp/guests.html', context)
+
+def prices(request):
+    with connections['default'].cursor() as cursor:
+        cursor.execute("SELECT * FROM rooms_prices_with_address")
+        hotel_list = cursor.fetchall()
+    context = {'hotels': hotel_list}
+    return render(request, 'databaseapp/prices.html', context)
 

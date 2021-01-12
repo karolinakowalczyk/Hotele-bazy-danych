@@ -3,7 +3,7 @@
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <Name>hotele_baza</Name>
     <RootNamespace>hotele_baza</RootNamespace>
-    <InterpreterId>Global|PythonCore|3.9</InterpreterId>
+    <InterpreterId>Global|PythonCore|3.7</InterpreterId>
     <TestFramework>Pytest</TestFramework>
   </PropertyGroup>
   <PropertyGroup>
@@ -58,8 +58,10 @@
     <Content Include="databaseapp\templates\databaseapp\browse.html" />
     <Content Include="databaseapp\templates\databaseapp\browseresult.html" />
     <Content Include="databaseapp\templates\databaseapp\deleteReservation.html" />
+    <Content Include="databaseapp\templates\databaseapp\guests.html" />
     <Content Include="databaseapp\templates\databaseapp\index.html" />
     <Content Include="databaseapp\templates\databaseapp\login.html" />
+    <Content Include="databaseapp\templates\databaseapp\prices.html" />
     <Content Include="databaseapp\templates\databaseapp\showUserReservation.html" />
     <Content Include="databaseapp\templates\databaseapp\signUp.html" />
     <Content Include="databaseapp\templates\databaseapp\userPanel.html" />

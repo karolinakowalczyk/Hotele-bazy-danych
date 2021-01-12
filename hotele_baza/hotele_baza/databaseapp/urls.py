@@ -15,6 +15,8 @@ urlpatterns = [
         path('<int:reservation_id>/deleteReservation/', views.deleteReservation, name='deleteReservation'),
         path('showUserReservation/', views.showUserReservation, name='showUserReservation'),
         path('adminPanel/', views.adminPanel, name='adminPanel'),
+        path('adminPanel/guests/', views.guests, name='guests'),
         path('browse/results', views.browseResult, name='browseresults'),
         path('<int:reservation_id>/deleteCurrentReservation/', views.deleteCurrentReservation, name='deleteCurrentReservation'),
+        path('prices/', views.prices, name = 'prices'),
     ]

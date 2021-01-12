@@ -1,0 +1,22 @@
+﻿{% extends "databaseapp/base.html" %}
+{% block content %} 
+    <table>
+        <tr>Current prices in our hotels:</tr>
+        <tr>
+            <th></th>
+            <th>Address:</th>
+            <th>Lowest room price:</th>
+            <th>Mean room price:</th>
+            <th>Highest room price:</th>
+        </tr>
+            {% for h, city, street, number, pc, low, high, mean in hotels %}
+                <tr>
+                    <th>{{ h }} </th>
+                    <th>{{ city}}, {{street}} {{number}} </th>
+                    <th>{{ low }} </th>
+                    <th>{{ mean}} </th>
+                    <th>{{ high}} </th>
+                </tr>
+             {% endfor %}
+    </table>
+{% endblock content %} 

@@ -13,6 +13,7 @@ class SignUpForm(forms.ModelForm):
             'email': forms.EmailInput,
         }
 
+
 class loginForm(forms.ModelForm):
     class Meta:
         model = Users
@@ -27,10 +28,10 @@ class BrowseForm(forms.Form):
     for h in Hotels.objects.all().prefetch_related('location'):
         loc = ""+h.location.city+", "+h.location.street+" "+str(h.location.number)
         LOCATIONS.append((h.hotel_id,loc))
-    loc = forms.CharField(label='test:', widget=forms.Select(choices=LOCATIONS))
-    dateS = forms.DateField(label='dateStart', widget=forms.SelectDateWidget(years=range(date.today().year,date.today().year+4)))
-    dateE = forms.DateField(label='dateEnd', widget=forms.SelectDateWidget(years=range(date.today().year,date.today().year+4)))
-    animals = forms.BooleanField(label='animals?', required=False)
+    loc = forms.CharField(label='Hotel:', widget=forms.Select(choices=LOCATIONS))
+    dateS = forms.DateField(label='Start date: ', widget=forms.SelectDateWidget(years=range(date.today().year,date.today().year+4)))
+    dateE = forms.DateField(label='End date: ', widget=forms.SelectDateWidget(years=range(date.today().year,date.today().year+4)))
+    animals = forms.BooleanField(label='Require animals: ', required=False)
 
     def clean(self):
         cleaned_data = super().clean()
@@ -43,3 +44,10 @@ class BrowseForm(forms.Form):
             self.add_error('dateS',"The dates cannot be in the past")
         if ds > de:
             self.add_error('dateE','Start date must be before end date')
+
+class HotelsForm(forms.Form):
+    LOCATIONS=[]
+    for h in Hotels.objects.all().prefetch_related('location'):
+        loc = ""+h.location.city+", "+h.location.street+" "+str(h.location.number)
+        LOCATIONS.append((h.hotel_id,loc))
+    loc = forms.CharField(widget=forms.Select(choices=LOCATIONS))

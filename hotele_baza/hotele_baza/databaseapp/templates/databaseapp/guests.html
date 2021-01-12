@@ -1,0 +1,38 @@
+﻿{% extends "databaseapp/base.html" %}
+
+{% block content %} 
+    <div class="HotelsForm">
+
+        <label>Select a hotel:</label> 
+        <form action="{% url 'databaseapp:guests' %}" method='post'>
+        {% csrf_token %}
+        {{form.as_p}}
+        <button name="searchBtn" type="submit">Go</button>
+        </form>
+    </div>
+
+{% if checked %}
+    {%if guests_list %}
+    <table>
+    <tr>
+        <th>First Name:</th>
+        <th>Last Name:</th>
+        <th>Room:</th>
+        <th>Check-In:</th>
+        <th>Check-Out:</th>
+    </tr>
+        {% for h, room, f, fname, sname, dates, datee in guests_list %}
+            <tr>
+                <th>{{ fname }} </th>
+                <th>{{ sname}} </th>
+                <th>{{ room}} </th>
+                <th>{{ dates}} </th>
+                <th>{{ datee}} </th>
+            </tr>
+         {% endfor %}
+</table>
+    {% else %}
+        No guests in current hotel
+    {% endif %}
+{% endif %}
+{% endblock content %} 
