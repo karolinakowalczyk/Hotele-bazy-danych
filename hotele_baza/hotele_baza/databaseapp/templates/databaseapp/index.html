@@ -13,6 +13,8 @@
         {% else %}
             {% if userRole == "admin" %}
                 <input type="button" onclick="location.href={% url 'databaseapp:adminPanel' %}" value="Go to admin panel" />
+                <input type="button" onclick="location.href={% url 'databaseapp:userPanel' %}" value="Go to user panel" />
+                <input type="button" onclick="location.href='browse';" value="Show free rooms" />
                 <input type="button" onclick="location.href={% url 'databaseapp:signOut' %}" value="Sign out" />
             {% elif userRole != "none" %}
                 <input type="button" onclick="location.href={% url 'databaseapp:userPanel' %}" value="Go to user panel" />
