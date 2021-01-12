@@ -1,36 +1,86 @@
 {% extends "databaseapp/base.html" %}
+{% load static %}
 
 {% block content %} 
 <!-- <p>User: {{user}}</p>
 <p>User role: {{userRole}}</p>-->
+    <nav class="navbar navbar-expand-md navbar-light bg-light mb-4 border">
+       
+        <ul class="navbar-nav ml-auto">
+            {% if user == 0 %}
+                <li class="nav-item">
+                    <button class="nav-link" onclick ="location.href={% url 'databaseapp:signUp' %}">Sign Up</button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link" onclick ="location.href={% url 'databaseapp:login' %}">Sign In</button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link" onclick ="location.href={% url 'databaseapp:browse' %}">Show free rooms</button>
+                </li>
+            {% else %}
+                {% if userRole == "admin" %}
+                    <li class="nav-item">
+                        <button class="nav-link" onclick ="location.href={% url 'databaseapp:adminPanel' %}">Go to admin panel</button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="nav-link" onclick ="location.href={% url 'databaseapp:userPanel' %}">Go to user panel</button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="nav-link" onclick ="location.href={% url 'databaseapp:browse' %}">Show free rooms</button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="nav-link" onclick ="location.href={% url 'databaseapp:signOut' %}">Sign out</button>
+                    </li>
+                {% elif userRole != "none" %}
+                    <li class="nav-item">
+                        <button class="nav-link" onclick ="location.href={% url 'databaseapp:userPanel' %}">Go to user panel</button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="nav-link" onclick ="location.href={% url 'databaseapp:browse' %}">Show free rooms</button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="nav-link" onclick ="location.href={% url 'databaseapp:signOut' %}">Sign out</button>
+                    </li>
+                {% endif %}       
+            {% endif %} 
+        </ul>
+    </nav>
+
 
     {% block page_header %}
         <div class="jumbotron">
             <h1 class="display-3">Welcome to our hotel site!</h1>
             <p class="lead">Book your dream room in comfortable conditions throughout Poland!</p>
-            <img src="main_img.jpg" class="img-fluid" alt="main img">
+            <img src="{% static 'databaseapp/main_img.jpg' %}" class="img-fluid" alt="main img"/>
         </div>
-        
-
     {% endblock page_header %}
-    <div class="basic_buttons">
+
+
+    <!--<div class="basic_buttons">
         {% if user == 0 %}
             <input type="button" onclick="location.href='signUp';" value="Sign Up" />
+            <br />
             <input type="button" onclick="location.href='login';" value="Sign in" />
+            <br />
             <input type="button" onclick="location.href='browse';" value="Show free rooms" />
         {% else %}
             {% if userRole == "admin" %}
                 <input type="button" onclick="location.href={% url 'databaseapp:adminPanel' %}" value="Go to admin panel" />
+                <br />
                 <input type="button" onclick="location.href={% url 'databaseapp:userPanel' %}" value="Go to user panel" />
+                <br />
                 <input type="button" onclick="location.href='browse';" value="Show free rooms" />
+                <br />
                 <input type="button" onclick="location.href={% url 'databaseapp:signOut' %}" value="Sign out" />
             {% elif userRole != "none" %}
                 <input type="button" onclick="location.href={% url 'databaseapp:userPanel' %}" value="Go to user panel" />
+                <br />
                 <input type="button" onclick="location.href='browse';" value="Show free rooms" />
+                <br />
                 <input type="button" onclick="location.href={% url 'databaseapp:signOut' %}" value="Sign out" />
             {% endif %} 
         {% endif %}
-    </div>
+    </div> -->
     <!-- 
     {% if user_list %}
         <ul>

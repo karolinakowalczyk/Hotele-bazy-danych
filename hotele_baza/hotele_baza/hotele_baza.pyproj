@@ -51,6 +51,7 @@
     <Compile Include="hotele_baza\wsgi.py" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="databaseapp\static\databaseapp\main_img.jpg" />
     <Content Include="databaseapp\templates\databaseapp\addReservation.html" />
     <Content Include="databaseapp\templates\databaseapp\adminPanel.html" />
     <Content Include="databaseapp\templates\databaseapp\base.html" />
@@ -59,7 +60,6 @@
     <Content Include="databaseapp\templates\databaseapp\deleteReservation.html" />
     <Content Include="databaseapp\templates\databaseapp\index.html" />
     <Content Include="databaseapp\templates\databaseapp\login.html" />
-    <Content Include="databaseapp\templates\databaseapp\main_img.jpg" />
     <Content Include="databaseapp\templates\databaseapp\showUserReservation.html" />
     <Content Include="databaseapp\templates\databaseapp\signUp.html" />
     <Content Include="databaseapp\templates\databaseapp\userPanel.html" />
@@ -68,6 +68,8 @@
   <ItemGroup>
     <Folder Include="databaseapp\" />
     <Folder Include="databaseapp\migrations\" />
+    <Folder Include="databaseapp\static\" />
+    <Folder Include="databaseapp\static\databaseapp\" />
     <Folder Include="databaseapp\templates\" />
     <Folder Include="databaseapp\templates\databaseapp\" />
     <Folder Include="hotele_baza\" />

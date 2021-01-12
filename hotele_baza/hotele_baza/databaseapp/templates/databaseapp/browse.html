@@ -7,11 +7,11 @@
         <form action="{% url 'databaseapp:browse' %}" method='post'>
         {% csrf_token %}
         {{form.as_p}}
-        <button name="signUpBtn" type="submit">Search</button>
+        <button name="searchBtn" type="submit">Search</button>
         </form>
     </div>
 
-     {% if rooms_list %}
+      <!--{% if rooms_list %}
         <ul>
         {% for room in rooms_list %}
             <li> {{ room.room_id }} </li>
@@ -28,5 +28,5 @@
         </ul>
     {% else %}
         <p>No polls are available.</p>
-    {% endif %}
+    {% endif %}-->
 {% endblock content %} 
