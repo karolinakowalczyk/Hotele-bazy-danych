@@ -2,6 +2,7 @@ from django import forms
 from django.core.exceptions import ValidationError
 from .models import Users, Locations, Hotels, Reservations
 from datetime import date
+import re
 
 class SignUpForm(forms.ModelForm):
     class Meta:
@@ -12,6 +13,26 @@ class SignUpForm(forms.ModelForm):
             'password': forms.PasswordInput,
             'email': forms.EmailInput,
         }
+
+    def clean(self):
+        login = self.cleaned_data['login']
+        pwd = self.cleaned_data['password']
+        phone = self.cleaned_data['phone']
+        name = self.cleaned_data['name']
+        sur = self.cleaned_data['surname']
+
+        if re.search('[^-a-zA-Z0-9_!#$%&\'*+,./:;<=>?@]', login):
+            self.add_error('login',"Login can only contain: letters, numbers and the following special characters: -_!#$%&\'*+,./:;<=>?@")
+        if re.search('[^-a-zA-Z0-9_!#$%&\'*+,./:;<=>?@]', pwd):
+            self.add_error('password',"Password can only contain: letters, numbers and the following special characters: -_!#$%&\'*+,./:;<=>?@")
+        elif not bool(re.match('[a-zA-Z]+[0-9]+',pwd)):
+            self.add_error('password',"Password needs to contain at least one letter and one number")
+        if re.search('[^-0-9\+]', phone):
+            self.add_error('phone',"Incorrect phone format - only numbers, - and + allowed")
+        if re.search('[^-a-zA-Z\' ]', name):
+            self.add_error('name',"Incorrect name format - only letters, spaces, - and ' allowed")
+        if re.search('[^-a-zA-Z\' ]', sur):
+            self.add_error('surname',"Incorrect name format - only letters, spaces, - and ' allowed")
 
 
 class loginForm(forms.ModelForm):
