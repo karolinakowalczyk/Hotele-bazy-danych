@@ -1,16 +1,19 @@
-﻿<!DOCTYPE html>
+﻿{% load bootstrap4 %}
+<!DOCTYPE html>
 
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8" />
     <title>Hotels</title>
-    <meta name="description" content="Book your dream room!" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    {% bootstrap_css %}
+    {% bootstrap_javascript jquery='full' %}
 </head>
 <body>
-    <p>
-        <a href = "{% url 'databaseapp:index' %}"> Main site </a>
-    </p>
+    <nav class="navbar navbar-expand-md navbar-light bg-light mb-4 border">
+        <a class="navbar-brand" href = "{% url 'databaseapp:index' %}"> Main site </a>
+    </nav>
     {% block content %} {% endblock content %} 
 </body>
 </html>

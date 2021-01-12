@@ -59,6 +59,7 @@
     <Content Include="databaseapp\templates\databaseapp\deleteReservation.html" />
     <Content Include="databaseapp\templates\databaseapp\index.html" />
     <Content Include="databaseapp\templates\databaseapp\login.html" />
+    <Content Include="databaseapp\templates\databaseapp\main_img.jpg" />
     <Content Include="databaseapp\templates\databaseapp\showUserReservation.html" />
     <Content Include="databaseapp\templates\databaseapp\signUp.html" />
     <Content Include="databaseapp\templates\databaseapp\userPanel.html" />

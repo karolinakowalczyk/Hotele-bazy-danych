@@ -1,10 +1,18 @@
 {% extends "databaseapp/base.html" %}
 
 {% block content %} 
-<p>User: {{user}}</p>
-<p>User role: {{userRole}}</p>
+<!-- <p>User: {{user}}</p>
+<p>User role: {{userRole}}</p>-->
 
-    <p>Book your dream room in comfortable conditions throughout Poland!</p>
+    {% block page_header %}
+        <div class="jumbotron">
+            <h1 class="display-3">Welcome to our hotel site!</h1>
+            <p class="lead">Book your dream room in comfortable conditions throughout Poland!</p>
+            <img src="main_img.jpg" class="img-fluid" alt="main img">
+        </div>
+        
+
+    {% endblock page_header %}
     <div class="basic_buttons">
         {% if user == 0 %}
             <input type="button" onclick="location.href='signUp';" value="Sign Up" />
@@ -23,7 +31,7 @@
             {% endif %} 
         {% endif %}
     </div>
-    
+    <!-- 
     {% if user_list %}
         <ul>
         {% for user in user_list %}
@@ -32,6 +40,6 @@
         </ul>
     {% else %}
         <p>No polls are available.</p>
-    {% endif %}
+    {% endif %}-->
 {% endblock content %} 
     
