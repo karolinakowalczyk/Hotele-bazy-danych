@@ -1,13 +1,18 @@
 ﻿{% extends "databaseapp/base.html" %}
-
+{% load bootstrap4 %}
 {% block content %}
-    <p>Selected period:</p>
-<ul>
-    <li>{{date_start}}</li>
-    <li>{{date_end}}</li>
-</ul>
-
-<table>
+    {% block page_header %}
+        <div class="jumbotron">
+            <h4>Selected period:</h4>
+    
+            <ul class=""list-group">
+                <li class="list-group-item">{{date_start}}</li>
+                <li class="list-group-item">{{date_end}}</li>
+            </ul>
+        </div>
+    {% endblock page_header %}
+    
+<table class="table">
     <tr>
         <th>Room:</th>
         <th>Floor:</th>

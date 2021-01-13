@@ -1,19 +1,22 @@
 ﻿{% extends "databaseapp/base.html" %}
-
+{% load bootstrap4 %}
 {% block content %} 
-    <div class="HotelsForm">
+    <div class="jumbotron">
 
-        <label>Select a hotel:</label> 
-        <form action="{% url 'databaseapp:guests' %}" method='post'>
-        {% csrf_token %}
-        {{form.as_p}}
-        <button name="searchBtn" type="submit">Go</button>
+        <h4>Select a hotel:</h4> 
+        <form action="{% url 'databaseapp:guests' %}" method='post' class="form">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            <!--{{form.as_p}}-->
+            {% buttons %}
+                <button name="searchBtn" type="submit" class="btn btn-light">Go</button>
+            {% endbuttons %}
         </form>
     </div>
 
 {% if checked %}
     {%if guests_list %}
-    <table>
+    <table class="table">
     <tr>
         <th>First Name:</th>
         <th>Last Name:</th>

@@ -1,10 +1,14 @@
 ﻿{% extends "databaseapp/base.html" %}
-
+{% load bootstrap4 %}
 {% block content %}
-    <div class="deletereservationfrom">
-        <p>Are you sure?</p>
-        {{reservation_id}}
-        <input type="button" onclick="location.href='../../{{reservation_id}}/deleteCurrentReservation';" value="Yes" />
-    </div>
+     {% block page_header %}
+        <div class="jumbotron">
+            <h4>Are you sure?</h4>
+            <!--{{reservation_id}}-->
+            {% buttons %}
+                <input type="button" onclick="location.href='../../{{reservation_id}}/deleteCurrentReservation';" value="Yes" class="btn btn-light"/>
+            {% endbuttons %}
+        </div>
+     {% endblock page_header %}
     
 {% endblock content %} 

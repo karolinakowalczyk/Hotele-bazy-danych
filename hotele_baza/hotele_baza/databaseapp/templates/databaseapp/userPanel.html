@@ -1,11 +1,13 @@
 ﻿{% extends "databaseapp/base.html" %}
-
+{% load bootstrap4 %}
 {% block content %}
-    <div class="userbuttons">
-        <input type="button" value="Show rooms" />
-        <br>
-        <input type="button" onclick="location.href={% url 'databaseapp:showUserReservation' %}" value="Show my reservations" />
-
+    {% block page_header %}
+        <h2>User panel:</h2> 
+    {% endblock page_header %}
+    <div class="jumbotron">
+        {% buttons %}
+            <input type="button" onclick="location.href={% url 'databaseapp:showUserReservation' %}" value="Show my reservations" class="btn btn-light"/>
+        {% endbuttons %}
     </div>
     
 {% endblock content %} 

@@ -1,13 +1,17 @@
 ﻿{% extends "databaseapp/base.html" %}
-
+{% load bootstrap4 %}
 {% block content %}
     <div class="loginform">
-
-        <label>Login panel:</label> 
-        <form action="{% url 'databaseapp:login' %}" method='post'>
+        {% block page_header %}
+            <h2>Login panel:</h2> 
+        {% endblock page_header %}
+            <form action="{% url 'databaseapp:login' %}" method='post' class="form">
         {% csrf_token %}
-        {{form.as_p}}
-        <button name="signUpBtn" type="submit">Sign in</button>
+        {% bootstrap_form form %}
+        <!--{{form.as_p}}-->
+        {% buttons %}
+            <button name="signUpBtn" type="submit">Sign in</button>
+        {% endbuttons %}
         </form>
     </div>
     

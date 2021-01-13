@@ -1,14 +1,22 @@
 ﻿{% extends "databaseapp/base.html" %}
-
+{% load bootstrap4 %}
 {% block content %}
-    <div class="addreservationfrom">
-        <p>add reservatrion</p>
-    </div>
-You've chosen to book in the period:
-<br />
-{{date_start.date}} - {{date_end.date}}
-    <br />
-Confirm?
-<input type="button" onclick="location.href='confirm'" value="Yes" />
-<input type="button" onclick="window.history.back(); return false;" value="No" />
+    {% block page_header %}
+        <div class="jumbotron">
+            <h4>Add reservatrion</h4>
+            <h5>You've chosen to book in the period:</h5>
+            <br />
+            <p class="lead">{{date_start.date}} - {{date_end.date}}</p>
+            <br />
+            <p class="lead">Confirm?</p>
+            {% buttons %}
+                <input type="button" onclick="location.href='confirm'" value="Yes" class="btn btn-light"/>
+            {% endbuttons %}
+            {% buttons %}
+                <input type="button" onclick="window.history.back(); return false;" value="No" class="btn btn-light"/>
+            {% endbuttons %}
+        </div>
+        
+    {% endblock page_header %}
+
 {% endblock content %} 

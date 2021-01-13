@@ -1,13 +1,18 @@
 ﻿{% extends "databaseapp/base.html" %}
-
+{% load bootstrap4 %}
 {% block content %} 
+    
     <div class="browseform">
-
-        <label>Search for free rooms:</label> 
-        <form action="{% url 'databaseapp:browse' %}" method='post'>
+        {% block page_header %}
+            <h2>Search for free rooms:</h2> 
+        {% endblock page_header %}
+        <form action="{% url 'databaseapp:browse' %}" method='post' class="form">
         {% csrf_token %}
-        {{form.as_p}}
-        <button name="searchBtn" type="submit">Search</button>
+        {% bootstrap_form form %}
+        <!--{{form.as_p}}-->
+        {% buttons %}
+            <button name="searchBtn" type="submit">Search</button>
+        {% endbuttons %}
         </form>
     </div>
 

@@ -1,11 +1,12 @@
 ﻿{% extends "databaseapp/base.html" %}
-
+{% load bootstrap4 %}
 {% block content %}
-    <p>Current user:</p>
-    <p>{{user}}</p>
-<br />
-<p>Past reservations</p>
-<table>
+    <!--<p>Current user:</p>
+    <p>{{user}}</p>-->
+<div class="jumbotron">
+    <h4>Past reservations</h4>
+</div>
+<table class="table">
      {% if reservations %}
         <tr>
         <th>Numer pokoju:</th>
@@ -26,8 +27,10 @@
     {% endif %}  
 </table>
 <br />
-<p>Current reservations</p>
-<table>
+<div class="jumbotron">
+    <h4>Current reservations</h4>
+</div>
+<table class="table">
      {% if reservations %}
         <tr>
         <th>Numer pokoju:</th>

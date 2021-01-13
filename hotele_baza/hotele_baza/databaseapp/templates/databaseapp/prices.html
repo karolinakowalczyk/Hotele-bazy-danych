@@ -1,7 +1,12 @@
 ﻿{% extends "databaseapp/base.html" %}
+{% load bootstrap4 %}
 {% block content %} 
-    <table>
-        <tr>Current prices in our hotels:</tr>
+    {% block page_header %}
+        <div class="jumbotron">
+            <h4>Current prices in our hotels:</h4>
+        </div>
+    {% endblock page_header %}
+    <table class="table">
         <tr>
             <th></th>
             <th>Address:</th>

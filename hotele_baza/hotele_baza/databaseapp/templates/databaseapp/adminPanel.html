@@ -1,10 +1,17 @@
 ﻿{% extends "databaseapp/base.html" %}
-
+{% load bootstrap4 %}
 {% block content %}
-    <div class="adminbuttons">
-       <a href="../admin/"  target="_blank">Show admin site</a>
-        <br>
-       <input type="button" onclick="location.href='/adminPanel/guests'" value="Show current guests" />
+    {% block page_header %}
+        <h2>Admin panel:</h2> 
+    {% endblock page_header %}
+    
+    <div class="jumbotron">
+       {% buttons %}
+            <a href="../admin/"  target="_blank">Show admin site</a>
+       {% endbuttons %}
+       {% buttons %}
+            <input type="button" onclick="location.href='/adminPanel/guests'" value="Show current guests" class="btn btn-light"/>
+       {% endbuttons %}
     </div>
     
 {% endblock content %} 
