@@ -19,4 +19,7 @@ urlpatterns = [
         path('browse/results', views.browseResult, name='browseresults'),
         path('<int:reservation_id>/deleteCurrentReservation/', views.deleteCurrentReservation, name='deleteCurrentReservation'),
         path('prices/', views.prices, name = 'prices'),
+        path('loginfailed/', views.loginfailed, name = 'loginfailed'),
+        path('userPanel/password/', views.password, name='password'),
+        path('userPanel/passworderror/', views.passworderror, name='passworderror'),
     ]

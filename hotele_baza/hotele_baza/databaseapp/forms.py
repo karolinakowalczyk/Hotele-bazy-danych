@@ -4,6 +4,7 @@ from .models import Users, Locations, Hotels, Reservations
 from datetime import date
 import re
 
+
 class SignUpForm(forms.ModelForm):
     class Meta:
         model = Users
@@ -72,3 +73,20 @@ class HotelsForm(forms.Form):
         loc = ""+h.location.city+", "+h.location.street+" "+str(h.location.number)
         LOCATIONS.append((h.hotel_id,loc))
     loc = forms.CharField(widget=forms.Select(choices=LOCATIONS))
+
+class PwdForm(forms.Form):
+    old = forms.CharField(label='Old password:', widget=forms.PasswordInput)
+    new = forms.CharField(label='New password:', widget=forms.PasswordInput)
+
+    def clean(self):
+        old = self.cleaned_data['old']
+        new = self.cleaned_data['new']
+
+        if re.search('[^-a-zA-Z0-9_!#$%&\'*+,./:;<=>?@]', new):
+            self.add_error('new',"Password can only contain: letters, numbers and the following special characters: -_!#$%&\'*+,./:;<=>?@")
+        elif not bool(re.match('[a-zA-Z]+[0-9]+',new)):
+            self.add_error('new',"Password needs to contain at least one letter and one number")
+        if old == new:
+            self.add_error('new',"New password must be different from the old one")
+            self.add_error('old',"")
+      

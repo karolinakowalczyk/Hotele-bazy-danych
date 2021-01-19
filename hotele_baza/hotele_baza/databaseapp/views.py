@@ -2,13 +2,14 @@ from django.shortcuts import render, redirect
 #from django.contrib.auth.forms import UserCreationForm
 from django.db import connections
 from .models import Users, Rooms, Reservations, Hotels, Locations
-from .forms import SignUpForm, loginForm, BrowseForm, HotelsForm
+from .forms import SignUpForm, loginForm, BrowseForm, HotelsForm, PwdForm
 import datetime
 from datetime import date, timedelta
 import logging
 
 
 currentUserId = 0
+
 
 def index(request):
     user_list = Users.objects.order_by('surname')[:5]
@@ -38,7 +39,7 @@ def login(request):
                return redirect('databaseapp:userPanel')
         #nieudane logowanie - tymczasowo strona glowna
         else:
-            return redirect('databaseapp:index')
+            return redirect('databaseapp:loginfailed')
     context = {'form': form}
     return render(request, 'databaseapp/login.html', context)
 
@@ -166,3 +167,26 @@ def prices(request):
     context = {'hotels': hotel_list}
     return render(request, 'databaseapp/prices.html', context)
 
+def loginfailed(request):
+    return render(request, 'databaseapp/loginfailed.html')
+
+def password(request):
+    if request.method != 'POST':
+        form = PwdForm()
+    else:
+        form = PwdForm(data = request.POST)
+        old = request.POST['old']
+        new = request.POST['new']
+        currentUser = Users.objects.all().get(user_id=currentUserId)
+        if form.is_valid():
+            if old == currentUser.password:
+                currentUser.password = new
+                currentUser.save()
+            else:
+                return redirect('databaseapp:passworderror')
+            
+    context = {'form': form}
+    return render(request, 'databaseapp/password.html', context)
+
+def passworderror(request):
+    return render(request, 'databaseapp/passworderror.html')
