@@ -28,8 +28,9 @@ class SignUpForm(forms.ModelForm):
             self.add_error('password',"Password can only contain: letters, numbers and the following special characters: -_!#$%&\'*+,./:;<=>?@")
         elif not bool(re.match('[a-zA-Z]+[0-9]+',pwd)):
             self.add_error('password',"Password needs to contain at least one letter and one number")
-        if re.search('[^-0-9\+]', phone):
-            self.add_error('phone',"Incorrect phone format - only numbers, - and + allowed")
+        if phone:
+            if re.search('[^-0-9\+]', phone):
+                self.add_error('phone',"Incorrect phone format - only numbers, - and + allowed")
         if re.search('[^-a-zA-Z\' ]', name):
             self.add_error('name',"Incorrect name format - only letters, spaces, - and ' allowed")
         if re.search('[^-a-zA-Z\' ]', sur):
